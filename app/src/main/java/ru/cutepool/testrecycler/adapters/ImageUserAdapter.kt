@@ -28,9 +28,9 @@ class ImageUserAdapter @JvmOverloads constructor(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("DEBUG", "imageUser bindViewHolder")
+        Log.d("DEBUG", "imageUser bindViewHolder $position")
         with(holder.itemView) {
-            glide.load("https://funik.ru/wp-content/uploads/2018/12/c92e40a3cfefffa1bbf2-700x1050.jpg")
+            glide.load(links[position])
                 .addListener(object : RequestListener<Drawable> {
                     override fun onResourceReady(resource: Drawable?, model: Any?, target: Target<Drawable>?, dataSource: DataSource?, isFirstResource: Boolean): Boolean {
 

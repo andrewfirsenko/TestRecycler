@@ -1,8 +1,11 @@
 package ru.cutepool.testrecycler
 
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SnapHelper
 import kotlinx.android.synthetic.main.activity_main.*
@@ -42,48 +45,48 @@ class MainActivity : AppCompatActivity() {
 
         adapter.update(GenerateAlien.generate(30))
 
-//        adapter.setHasStableIds(true)
-//        helper = PagerSnapHelper()
-//        helper.attachToRecyclerView(act_main__rv)
+        adapter.setHasStableIds(true)
+        helper = PagerSnapHelper()
+        helper.attachToRecyclerView(act_main__rv)
 
 
         act_main__rv.adapter = adapter
         act_main__rv.layoutManager = layoutManager
-//        act_main__rv.setHasFixedSize(true)
-//        act_main__rv.setItemViewCacheSize(10)
-//        act_main__rv.clearOnScrollListeners()
+        act_main__rv.setHasFixedSize(true)
+        act_main__rv.setItemViewCacheSize(10)
+        act_main__rv.clearOnScrollListeners()
 
 
 
-//        act_main__rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                val pos = (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
-//                if (pos + PAGINATION_THRESHOLD > adapter.itemCount) {
-//                    Log.d("DEBUG", "want loadUsers")
-//                }
-//            }
-//        })
-//        act_main__rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-//            var lastPosition = 0
-//            var maxPosition = 0
-//
-//            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-//                super.onScrolled(recyclerView, dx, dy)
-//                val snapView = helper.findSnapView(layoutManager)
-//                if (snapView != null) {
-//                    val pos = layoutManager.getPosition(snapView)
-//                    updateUser(adapter.getUser(pos))
-//                    if (pos == lastPosition) {
-//                        return
-//                    }
-//                    if (pos > maxPosition) {
-//                        maxPosition = pos
-//                    }
-//                    lastPosition = pos
-//                }
-//            }
-//        })
+        act_main__rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val pos = (layoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+                if (pos + PAGINATION_THRESHOLD > adapter.itemCount) {
+                    Log.d("DEBUG", "want loadUsers")
+                }
+            }
+        })
+        act_main__rv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            var lastPosition = 0
+            var maxPosition = 0
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                val snapView = helper.findSnapView(layoutManager)
+                if (snapView != null) {
+                    val pos = layoutManager.getPosition(snapView)
+                    updateUser(adapter.getUser(pos))
+                    if (pos == lastPosition) {
+                        return
+                    }
+                    if (pos > maxPosition) {
+                        maxPosition = pos
+                    }
+                    lastPosition = pos
+                }
+            }
+        })
     }
 
     private fun updateUser(user: Alien) {

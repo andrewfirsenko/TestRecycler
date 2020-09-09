@@ -28,7 +28,7 @@ class MainAdapter @JvmOverloads constructor(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("DEBUG", "main bindViewHolder")
+        Log.d("DEBUG", "main bindViewHolder $position")
         holder.bind(users[position])
     }
 
